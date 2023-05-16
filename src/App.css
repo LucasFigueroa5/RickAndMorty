@@ -1,3 +1,22 @@
 .App {
    text-align: center;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
 }
+
+body {
+   font-family: 'Roboto', sans-serif;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+   background: rgb(176,0,214);
+background: linear-gradient(0deg, rgba(176,0,214,1) 0%, rgba(34,199,200,1) 100%);
+ }
+
+ * {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+ }
+ 
