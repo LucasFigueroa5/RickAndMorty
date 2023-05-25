@@ -7,8 +7,7 @@ import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import About from './components/About/About.jsx'
 import Detail from './components/Detail/Detail.jsx';
 import FormUser from './components/FormUser/FormUser.jsx'
-import Scroll from './components/Scroll/Scroll';
-
+import Favorites from './components/Favorites/Favorites';
 
 function App() {
 
@@ -21,7 +20,7 @@ function App() {
    
    useEffect(() => {
       !access && navigate('/');
-   }, [access]);
+   }, [access, navigate]);
    
    function login(userData) {
       if (userData.username === username && userData.password === password) {
@@ -58,6 +57,7 @@ function App() {
             <Route path='/about' element={<About />} />
             <Route path='/home' element={<Cards characters={characters} onClose={onClose} />} />
             <Route path='/detail/:id' element={<Detail />} />
+            <Route path='favorites' element={<Favorites />} />
          </Routes>
 
       </div>

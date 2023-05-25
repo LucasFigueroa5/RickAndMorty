@@ -4,23 +4,30 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebookF, faGithub, faInstagram, faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
 import rickAndMortyImage from "./Rick-and-Morty.png";
 import rym from './rym.png'
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 
 const Header = () => {
   return (
     <div className='header-cont'>
-        <div className='vacio'>
+        <div className='botones'>
           <NavLink to='/home'>
             <button className='btn-nav'>
             Home
             </button>
           </NavLink>
+          <div className='btn-sep'></div>
           <NavLink to='/about'>
             <button className='btn-nav'>
               About
             </button>
           </NavLink>
+          <div className='btn-sep'></div>
+          <Link to='/favorites'>
+            <button className='btn-nav'>
+              Favorites
+            </button>
+          </Link>
           
         </div>
         <img 

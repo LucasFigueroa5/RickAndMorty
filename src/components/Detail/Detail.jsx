@@ -1,6 +1,6 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+// import axios from "axios";
+import React from "react";
+import { useLocation } from "react-router-dom";
 import "./Detail.css";
 
 const Detail = (props) => {
