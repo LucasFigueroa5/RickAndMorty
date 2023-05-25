@@ -1,80 +1,16 @@
-/* .image {
-    width: 250px;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 91%);
-}
-
 .card-container {
     display: flex;
     flex-direction: column;
-    height: 500px;
-    align-items: center;
-    width: 250px; 
-    margin: 50px;
-    background-color: white;
-    transition:all 0.5s ease;
-}
-.card-container:hover {
-    cursor: pointer;
-    outline: 1px white solid;
-    box-shadow: 0px 0px 100px 11px rgba(255, 255, 116);
-}
-.image-container {
-    padding-top: -10px;
-}
-.btn {
-    height: 30px;
-    width: 30px;
-    top: 40px;
-    border-radius: 50%;
-    position: relative;
-    left: 100px;
-    z-index: 0;
-    border: none;
-    outline: none;
-    background: rgb(221, 77, 77);
-    transition: all 0.5s;
-}
-
-.btn:hover {
-    cursor: pointer;
-    background: white;
-    font-size: 20px;
-}
-
-.info-container {
-    display: flex;
-    position: relative;
-    top: -48px;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 150px;
-    width: 272px;
-    background-color: white;
+}
+.image {
+    border-radius: 1rem 1rem 0 0;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 90%);
 }
 
 .name {
-    position: relative;
-    top: -48px;
-    height: 47px;
     background-color: rgb(255, 255, 116);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    clip-path: polygon(3% 18%, 94% 4%, 100% 100%, 0 100%);
-    width: 209px;
-}
-
-.borde {
-    width: 100%;
-    border-bottom: 5px rgb(255, 255, 116) solid;
-    transform: rotate(5deg);
-    position: relative;
-    top: -17px;
-} */
-
-.image {
-    border-radius: 1rem;
 }
 
 .btn {
@@ -82,13 +18,13 @@
     width: 20px;
     border-radius: 50%;
     position: relative;
-    left: 254px;
-    border: 1px solid white;
-    outline: none;
+    /* left: 254px; */
     top: 34px;
+    margin-top: 30px;
+    outline: none;
     transition: all 0.2s;
     align-items: center;
-    color: white;
+    color: rgb(252, 68, 68);
     font-family: 'Roboto';
     display: flex;
     justify-content: center;
@@ -97,62 +33,95 @@
 
 .btn:hover {
     cursor: pointer;
-    border: 1px solid rgb(215, 68, 68);
-    color: rgb(215, 68, 68);
+    color: rgb(207, 56, 56);
+    transform: scale(1.2);
+}
+.btn:active {
+    cursor: pointer;
+    color: rgb(231, 213, 228);
+    transform: scale(1.5);
+    transform: rotate(30deg);
+    border: none;
 }
 
 .flip-card {
     display: flex;
     flex-direction: column;
-    height: 500px;
     align-items: center;
-    width: 250px; 
+    width: 250px;
     margin: 50px;
     background-color: transparent;
-    height: 254px;
+    height: 300px;
     perspective: 1000px;
     font-family: sans-serif;
-  }
-  
-  .title {
+}
+
+.title {
     font-size: 1.5em;
     font-weight: 900;
     text-align: center;
     margin: 0;
-  }
-  
-  .flip-card-inner {
+}
+
+.flip-card-inner {
     position: relative;
     width: 100%;
     height: 100%;
     text-align: center;
     transition: transform 0.8s;
     transform-style: preserve-3d;
-  }
-  
-  .flip-card:hover .flip-card-inner {
+}
+
+.flip-card:hover .flip-card-inner {
     transform: rotateY(180deg);
     box-shadow: 0px 0px 100px 11px rgba(255, 255, 116, 0.5);
     border-radius: 1rem;
-  }
-  
-  .flip-card-front, .flip-card-back {
-    box-shadow: 0px 0px 100px 11px rgba(0,0,0,0.2);
+    border: 2px rgb(255, 193, 203) solid;
+}
+
+.flip-card-front,
+.flip-card-back {
     position: absolute;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     width: 100%;
     height: 100%;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     border-radius: 1rem;
     transition: all 0.5s ease;
-  }
-  
-  .flip-card-back {
-    background: rgb(255,255,195);
-    background: linear-gradient(128deg, rgba(255,255,195,1) 0%, rgba(255,228,91,1) 100%);
-    color: black;
+    background: rgb(84,33,75);
+    background: linear-gradient(310deg, rgba(84,33,75,1) 19%, rgba(149,72,137,1) 87%);
+    color: rgb(178, 223, 40);
+}
+
+.flip-card-back {
+    background: rgb(84,33,75);
+    background: linear-gradient(310deg, rgba(84,33,75,1) 19%, rgba(149,72,137,1) 87%);
     transform: rotateY(180deg);
-  }
+    justify-content: center;
+}
+
+.flip-card-back h2 {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+}
+
+.image-title {
+    font-weight: 500;
+    font-size: 1.5rem;
+    line-height: 1.2;
+    position: relative;
+    top: -7px;
+    color: #8a2be2;
+}
+
+.info-icon {
+    font-size: 2em;
+    color: rgb(255, 193, 203);
+}
+.info-icon:hover {
+    color: #ffffff;
+    cursor: pointer;
+}

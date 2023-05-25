@@ -1,18 +1,34 @@
 .search-cont {
     width: 100%;
-    margin: 40px 0 40px 0;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
 }
 
 .searcher {
     all: initial;
-    border-bottom: 1px white solid;
+    border-bottom: 2px black solid;
     width: 200px;
     height: 30px;
     font-family: 'Roboto';
+    margin-right: 20px;
+
+}
+.searcher::placeholder {
+    color: rgb(255, 255, 172);
+    font-weight: lighter;
 }
 
 .btnAdd {
     all: initial;
-    font-family: 'Roboto';
-    color: white;
+    transition: all 0.5s ease;
+}
+
+.btnAdd:hover {
+    transform: scale(1.2);
+}
+input[type="text"]::-webkit-clear-button,
+input[type="text"]::-webkit-outer-spin-button,
+input[type="text"]::-webkit-inner-spin-button {
+  display: none;
 }
