@@ -1,67 +1,87 @@
 import { useEffect, useState } from 'react';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './App.css';
+
 import Cards from './components/Cards/Cards.jsx';
 import Nav from './components/Nav/Nav';
-import axios from 'axios';
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
-import About from './components/About/About.jsx'
+import About from './components/About/About.jsx';
 import Detail from './components/Detail/Detail.jsx';
-import FormUser from './components/FormUser/FormUser.jsx'
-import Favorites from './components/Favorites/Favorites';
+import FormUser from './components/FormUser/FormUser.jsx';
+import Favorites from './components/Favorites/Favorites.jsx';
 
 function App() {
+  const [characters, setCharacters] = useState([]);
+  const [access, setAccess] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-   const [characters, setCharacters] = useState([]);
+  useEffect(() => {
+    !access && navigate('/');
+  }, [access, navigate]);
 
-   const [access, setAccess] = useState(false);
-   const username = 'lucas@gmail.com'
-   const password = 'lucas123'
-   const navigate = useNavigate();   
-   
-   useEffect(() => {
-      !access && navigate('/');
-   }, [access, navigate]);
-   
-   function login(userData) {
-      if (userData.username === username && userData.password === password) {
-         setAccess(true);
-         navigate('/home')
-   }}
-   
-   function onSearch(id) {
-      axios(`https://rickandmortyapi.com/api/character/${id}`)
-         .then(({ data }) => {
-            if (data.id) {
-               setCharacters((oldChars) => [...oldChars, data]);
-            }
-         })
-         .catch(() => {
-            window.alert(`¡No existe un personaje ${id} !`);
-         })
-   }
+  async function login(userData) {
+    const { username, password } = userData;
+    const URL = 'http://localhost:3001/rickandmorty/login/';
 
-   function onClose(id) {
-      setCharacters(characters.filter(character => character.id !== Number(id)))
-   }
+    try {
+      const response = await axios.get(URL, {
+        params: {
+          email: username,
+          password: password
+        }
+      });
 
-   const location = useLocation();
+      const { access } = response.data;
+      setAccess(response.data);
 
+      if (access) {
+        navigate('/home');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
+  async function onSearch(id) {
+    try {
+      const characterId = characters.filter(char => char.id === id);
+      const response = await axios(`http://localhost:3001/rickandmorty/character/${id}`);
 
-   return (
-      <div className='App'>
-         {location.pathname !== '/' && <Nav onSearch={onSearch} /> }
-         {/* <Scroll /> */}
-         <Routes>            
-            <Route exact path='/' element={<FormUser login={login} />} />
-            <Route path='/about' element={<About />} />
-            <Route path='/home' element={<Cards characters={characters} onClose={onClose} />} />
-            <Route path='/detail/:id' element={<Detail />} />
-            <Route path='favorites' element={<Favorites />} />
-         </Routes>
+      if (characterId.length) {
+        return alert(`Ya tienes la carta con el id: ${id}`);
+      }
+      if (id < 1 || id > 826) {
+        return alert(`No existe una carta con el id: ${id}`);
+      }
 
-      </div>
-   );
+      const { data } = response;
+
+      if (data.name) {
+        setCharacters((oldChars) => [...oldChars, data]);
+      }
+    } catch (error) {
+      window.alert(`¡No existe un personaje ${id}!`);
+    }
+  }
+
+  function onClose(id) {
+    setCharacters(characters.filter(character => character.id !== id));
+  }
+
+  return (
+    <div className='App'>
+      {location.pathname !== '/' && <Nav onSearch={onSearch} />}
+      {/* <Scroll /> */}
+      <Routes>
+        <Route exact path='/' element={<FormUser login={login} />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/home' element={<Cards characters={characters} onClose={onClose} />} />
+        <Route path='/detail/:id' element={<Detail onClose={onClose} />} />
+        <Route path='/favorites' element={<Favorites onClose={onClose} />} />
+      </Routes>
+    </div>
+  );
 }
 
 export default App;

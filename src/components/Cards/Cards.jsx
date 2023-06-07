@@ -16,6 +16,7 @@ export default function Cards({characters, onClose}) {
             origin={character.origin?.name}
             image={character.image}
             onClose={onClose}
+            showCloseButton={true}
             />))
          }
       </div>

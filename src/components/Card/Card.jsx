@@ -12,7 +12,7 @@ const cardName = {
 };
 
 export default function Card(props) {
-  const { name, gender, image, status, origin, species, id } = props;
+  const { name, gender, image, status, origin, species, id, showCloseButton } = props;
   
   const myFavorites = useSelector(state => state.myFavorites)
   
@@ -36,35 +36,38 @@ export default function Card(props) {
           setIsFav(true);
        }
     });
- }, [myFavorites, props.id]);
+  }, [myFavorites, props.id]);
 
   return (
     <div className="card-container">
       <div className="btns-cont">
         {
-          isFav? (
+          isFav ? (
             <button 
               className="btn-fav btn-true"
               onClick={handleFavorite}
             >
               <FontAwesomeIcon icon={faHeart} />
             </button>
-
-          ) : <button 
-          className="btn-fav btn-false"
-          onClick={handleFavorite}
-        >
-          <FontAwesomeIcon icon={faHeart} />
-        </button>
+          ) : (
+            <button 
+              className="btn-fav btn-false"
+              onClick={handleFavorite}
+            >
+              <FontAwesomeIcon icon={faHeart} />
+            </button>
+          )
         }
-        <button
-          className="btn-close"
-          onClick={() => {
-            props.onClose(id);
-          }}
-        >
-          <FontAwesomeIcon icon={faCircleXmark} shake />
-        </button>
+        {showCloseButton && (
+          <button
+            className="btn-close"
+            onClick={() => {
+              props.onClose(id);
+            }}
+          >
+            <FontAwesomeIcon icon={faCircleXmark} shake />
+          </button>
+        )}
       </div>
       <div className="flip-card">
         <div className="flip-card-inner">

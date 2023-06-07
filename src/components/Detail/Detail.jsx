@@ -1,25 +1,27 @@
-// import axios from "axios";
-import React from "react";
-import { useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation, useParams } from "react-router-dom";
 import "./Detail.css";
+import { faCircleLeft } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
 
 const Detail = (props) => {
-  //   const {id} = useParams()
-  //   const [character, setCharacter] = useState()
-  //   useEffect(() => {
-  //     axios(`https://rickandmortyapi.com/api/character/${id}`).then(({ data }) => {
-  //        if (data.name) {
-  //           setCharacter(data);
-  //        } else {
-  //           window.alert('No hay personajes con ese ID');
-  //        }
-  //     });
-  //     return setCharacter({});
-  //  }, [id]);
+    const {id} = useParams()
+    const [character, setCharacter] = useState()
+    useEffect(() => {
+      axios(`http://localhost:3001/rickandmorty/character/${id}`).then(({ data }) => {
+         if (data.name) {
+            setCharacter(data);
+         } else {
+            window.alert('No hay personajes con ese ID');
+         }
+      });
+      return setCharacter({});
+   }, [id]);
 
   let { state } = useLocation();
-  const { data } = state;
-  console.log(data)
+  const {data} = state;
+  
   return (
     <div className="detail-cont">
       <div className="det-left">
@@ -27,6 +29,20 @@ const Detail = (props) => {
       </div>
       <div className="separador"></div>
       <div className="det-right">
+        <div className="btn-detail">
+        <Link to='/home'>
+          <button
+            className="btn-close-det"
+            onClick={() => {
+              props.onClose(data.id);
+            }}
+          >
+            <FontAwesomeIcon className="btn-close-size" icon={faCircleLeft} />
+          </button>
+        </Link>
+
+        </div>
+        <div className="info-data">
         <h1>{data.name}</h1>
         <ul className="info-cont">
           <li>{data.species}</li>
@@ -37,6 +53,7 @@ const Detail = (props) => {
           <hr />
           <li>{data.origin}</li>
         </ul>
+        </div>
       </div>
     </div>
   );

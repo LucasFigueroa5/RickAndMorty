@@ -19,7 +19,6 @@ const Form = (props) => {
     setUserData({ ...userData, [name]: value });
 
     setErrors(validation({ ...userData, [name]: value }));
-    console.log(errors)
   };
 
   const handleSubmit = event => {
